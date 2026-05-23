@@ -17,37 +17,74 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://sabahat-portfolio.web.app/"),
   title: "Mohd Sabahat — Full-Stack Developer & AI/ML Engineer",
   description:
-    "Full-Stack Developer and AI/ML Engineer with 3+ years building production systems across Java, Spring Boot, Python, and JavaScript. Delhi, India.",
+    "Mohd Sabahat is a Full-Stack Developer and AI/ML Engineer with over 3 years of experience in building production-ready systems. Expertise in Java, Spring Boot, Python, JavaScript, React, and Next.js. Based in Delhi, India.",
   keywords: [
     "Mohd Sabahat",
     "Full-Stack Developer",
     "AI ML Engineer",
+    "Software Engineer",
+    "Java",
     "Spring Boot",
+    "Python",
+    "JavaScript",
     "React",
     "Next.js",
-    "Java",
-    "Python",
+    "TypeScript",
+    "Node.js",
+    "RESTful APIs",
+    "Microservices",
+    "Docker",
+    "Kubernetes",
+    "AWS",
+    "GCP",
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
     "Portfolio",
+    "Developer Portfolio",
+    "Delhi",
+    "India",
   ],
-  authors: [{ name: "Mohd Sabahat" }],
+  authors: [{ name: "Mohd Sabahat", url: "https://sabahat-portfolio.web.app/" }],
   creator: "Mohd Sabahat",
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: "https://sabahat-portfolio.web.app/",
     title: "Mohd Sabahat — Full-Stack Developer & AI/ML Engineer",
     description:
-      "Full-Stack Developer and AI/ML Engineer building production systems that matter.",
-    siteName: "Mohd Sabahat",
+      "Explore the portfolio of Mohd Sabahat, a Full-Stack Developer and AI/ML Engineer with a passion for building robust and scalable applications. Discover projects, skills, and experience in modern web technologies.",
+    siteName: "Mohd Sabahat's Portfolio",
+    images: [
+      {
+        url: "/images/sabahat.png",
+        width: 1200,
+        height: 630,
+        alt: "Mohd Sabahat's Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mohd Sabahat — Full-Stack Developer & AI/ML Engineer",
     description:
       "Full-Stack Developer and AI/ML Engineer building production systems that matter.",
+    images: ["/images/sabahat.png"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {

@@ -1,0 +1,48 @@
+# llms.txt
+
+name: Mohd Sabahat
+role: Full Stack Developer
+
+description:
+Personal portfolio website of Mohd Sabahat showcasing software engineering projects, web development work, technical skills, open-source contributions, and developer experience.
+
+about:
+Mohd Sabahat is a developer focused on modern web technologies, frontend engineering, backend systems, developer tooling, and AI-integrated applications.
+
+topics:
+- React
+- Next.js
+- TypeScript
+- JavaScript
+- Node.js
+- Tailwind CSS
+- Full Stack Development
+- Web Performance
+- UI/UX Engineering
+- APIs
+- AI Applications
+- Software Engineering
+
+content:
+- Portfolio projects
+- Technical case studies
+- Blog posts
+- Developer experiments
+- Resume/CV
+- Contact information
+
+preferred_summary:
+Mohd Sabahat is a full stack developer building performant, modern, and user-focused web applications with React, Next.js, and contemporary frontend/backend technologies.
+
+links:
+https://github.com/mohdsabahat
+https://linkedin.com/in/mohd-sabahat
+
+ai_usage_policy:
+- Summarization allowed
+- Citation preferred
+- Do not misattribute authorship
+- Do not fabricate projects or experience
+
+contact:
+mohdsabahat123@gmail.com
