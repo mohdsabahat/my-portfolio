@@ -1,26 +1,287 @@
 @import "tailwindcss";
 
+/* ===================================================================
+   THE NIGHT DESK — Design System
+   A warm, intimate palette inspired by lamplight on paper at midnight.
+   =================================================================== */
+
+/* Custom dark variant tied to data-theme attribute */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ===== Light Theme ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --page: #f6f0e6;
+  --surface: #ebe0cf;
+  --surface-strong: #e0d0b6;
+  --ink: #181311;
+  --ink-muted: #5e554d;
+  --accent: #b9822d;
+  --accent-hover: #c99343;
+  --edge: #ccbca7;
+  --surface-dim: rgba(235, 224, 207, 0.72);
+  --accent-dim: rgba(185, 130, 45, 0.14);
 }
 
+/* ===== Dark Theme ===== */
+[data-theme="dark"] {
+  --page: #090705;
+  --surface: #17120e;
+  --surface-strong: #241b14;
+  --ink: #f4ebde;
+  --ink-muted: #b6a898;
+  --accent: #e0aa59;
+  --accent-hover: #efba69;
+  --edge: #372b22;
+  --surface-dim: rgba(23, 18, 14, 0.82);
+  --accent-dim: rgba(224, 170, 89, 0.14);
+}
+
+/* Register tokens with Tailwind */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-edge: var(--edge);
+  --color-surface-dim: var(--surface-dim);
+  --color-accent-dim: var(--accent-dim);
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===== Base ===== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  background-color: var(--page);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-image:
+    linear-gradient(to right, transparent, transparent),
+    radial-gradient(circle at top left, rgba(224, 170, 89, 0.08), transparent 28%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02), transparent 18rem);
+}
+
+/* Subtle ambient lamplight glow in dark mode */
+[data-theme="dark"] body {
+  background-image: radial-gradient(
+    ellipse at 0% 0%,
+    rgba(224, 170, 89, 0.08) 0%,
+    transparent 42%
+  );
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(50% - 0.5px),
+    color-mix(in srgb, var(--edge) 28%, transparent) calc(50% - 0.5px),
+    color-mix(in srgb, var(--edge) 28%, transparent) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px),
+    transparent 100%
+  );
+  opacity: 0.35;
+  z-index: -1;
+}
+
+/* ===== Selection ===== */
+::selection {
+  background-color: var(--accent);
+  color: var(--page);
+}
+
+/* ===== Focus ===== */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink-muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ===== Section spacing ===== */
+/* .section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+} */
+
+/* ===== Timeline ===== */
+.timeline-entry {
+  position: relative;
+  padding-left: 1.5rem;
+  padding-bottom: 2.5rem;
+  border-left: 1px solid var(--edge);
+}
+
+.timeline-entry::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0.4rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.timeline-entry:last-child {
+  padding-bottom: 0;
+}
+
+/* Prevent long titles from overflowing the timeline cards on wide screens.
+Keep a pleasant measure and allow soft breaks/hyphenation. */
+.entry-title {
+  display: inline-block;
+  max-width: min(68ch, 100%);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  /* slightly responsive scaling for very wide viewports */
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+}
+
+.nav-shell {
+  background-color: color-mix(in srgb, var(--page) 84%, transparent);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid color-mix(in srgb, var(--edge) 92%, transparent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.frame {
+  border: 1px solid color-mix(in srgb, var(--edge) 95%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface) 92%, transparent),
+    color-mix(in srgb, var(--surface-dim) 100%, transparent)
+  );
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.section-rail {
+  position: sticky;
+  top: 6rem;
+}
+
+.section-index {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-index::after {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.section-heading {
+  margin-top: 1rem;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 0.95;
+}
+
+.metric-card {
+  border: 1px solid color-mix(in srgb, var(--edge) 92%, transparent);
+  background: color-mix(in srgb, var(--surface-dim) 96%, transparent);
+}
+
+.paper-note {
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--edge));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-dim) 100%, transparent),
+    color-mix(in srgb, var(--surface) 92%, transparent)
+  );
+}
+
+@media (max-width: 1023px) {
+  .section-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .section-rail {
+    position: static;
+  }
+
+  body::before {
+    display: none;
+  }
+}
+
+/* ===== Scroll indicator bounce ===== */
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+.scroll-hint {
+  animation: gentle-bounce 2.5s ease-in-out infinite;
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
